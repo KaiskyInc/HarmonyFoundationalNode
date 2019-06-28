@@ -1,4 +1,4 @@
-// Find latest Ubuntu 18.04 AMI
+# Find latest Ubuntu 18.04 AMI
 data "aws_ami" "ubuntu" {
   owners      = ["099720109477"]
   most_recent = true
@@ -23,6 +23,15 @@ data "aws_ami" "ubuntu" {
     values = ["ebs"]
   }
 }
+
+# Key Pair
+# Uncomment the resource below if you do not already have
+# an existing key pair. Create one locally and copy and paste
+# into "public_key" field.
+# resource "aws_key_pair" "foundational_node" {
+#   key_name   = "foundational_node"
+#   public_key = "$YOUR_PUBLIC_KEY"
+# }
 
 resource "aws_instance" "foundational-node" {
   ami                    = "${data.aws_ami.ubuntu.id}"
